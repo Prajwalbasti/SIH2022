@@ -1,0 +1,28 @@
+table {
+    width: 100%;
+    border-spacing: 0px;
+
+    thead {
+        background-color: var(--blue1);
+
+        th {
+            border: 1px solid var(--gray1);
+
+            p {
+                white-space: nowrap;
+                padding: 10px;
+                text-align: left;
+            }
+        }
+    }
+
+    tbody {
+        td {
+            border: 1px solid var(--gray1);
+
+            p {
+                padding: 10px;
+            }
+        }
+    }
+}
