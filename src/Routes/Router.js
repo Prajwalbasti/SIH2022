@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useState} from 'react'
 import { RouteData } from "./Routes.config"
 import {
     BrowserRouter,
@@ -10,11 +10,14 @@ import TablePage from '../Pages/TablePage/TablePage';
 import Upload from '../Components/Upload/Upload';
 
 function Router() {
+
+    const [data, setData] = useState([])
+
     return (
         <div>
             <Routes>
-                <Route path="table" element={<TablePage />}></Route>
-                <Route path="upload" element={<Upload/>}></Route>
+                <Route path="table" element={<TablePage data={data} />}></Route>
+                <Route path="upload" element={<Upload setData={setData}/>}></Route>
             </Routes>
         </div>
     )
