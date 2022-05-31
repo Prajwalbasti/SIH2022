@@ -8,6 +8,7 @@ import {
 
 import TablePage from '../Pages/TablePage/TablePage';
 import Upload from '../Components/Upload/Upload';
+import UploadedFiles from '../Pages/UploadedFiles/UploadedFiles';
 
 function Router() {
 
@@ -18,6 +19,7 @@ function Router() {
             <Routes>
                 <Route path="table" element={<TablePage data={data} />}></Route>
                 <Route path="upload" element={<Upload setData={setData}/>}></Route>
+                <Route path="uploaded" element={<UploadedFiles />}></Route>
             </Routes>
         </div>
     )
