@@ -63,7 +63,6 @@ function Upload({setData}) {
           <FileShow setData={setData} file={file} />
         </div> : null }
         
-
     </div>
   )
 }

@@ -9,3 +9,23 @@
   --blue2: #0762A3;
 }
 
+
+body{
+  font-size: 16px;
+}
+
+@media only screen and (max-width: 1280px) {
+  body {
+    font-size: 12px !important;
+  }
+}
+@media only screen and (max-width: 1000px) {
+  body {
+    font-size: 11px !important;
+  }
+}
+@media only screen and (max-width: 1600px) {
+  body {
+    font-size: 13px;
+  }
+}
