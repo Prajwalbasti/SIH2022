@@ -11,6 +11,7 @@ import Upload from '../Components/Upload/Upload';
 import UploadedFiles from '../Pages/UploadedFiles/UploadedFiles';
 import Login from '../Pages/Login/Login';
 import Register from '../Pages/Register/Register';
+import Home from '../Pages/Home/Home';
 
 function Router() {
 
@@ -24,7 +25,7 @@ function Router() {
                 <Route path="uploaded" element={<UploadedFiles />}></Route>
                 <Route path="login" element={<Login />}></Route>
                 <Route path="register" element={<Register />}></Route>
-
+                <Route path="/" element={<Home />}></Route>
             </Routes>
         </div>
     )

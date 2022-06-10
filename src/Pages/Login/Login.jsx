@@ -3,7 +3,7 @@ import Input from '../../Components/Input/Input'
 import { db, auth } from "../../firebase/firebase";
 import firebase from "firebase";
 import "./Login.scss"
-import visibility from "../../Assets/Vector.png"
+import visibility from "../../Assets/eye-closed.png"
 import google_logo from "../../Assets/Google.png"
 
 import {Link, useNavigate} from "react-router-dom"
