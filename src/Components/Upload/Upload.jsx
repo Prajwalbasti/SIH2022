@@ -18,8 +18,8 @@ function Upload({ setData }) {
   const [progressState,setProgressState] = useState('Upload File')
 
   const handleUpload = (e) => {
+    progreeHandler();
     setFile(e.target.files);
-    setUploaded(true);
   }
 
 
@@ -51,12 +51,13 @@ function Upload({ setData }) {
     setTimeout(() => {
       setProgressState('file is ready');
       setProgress('100%');
+      setUploaded(true);
     }, 3500);
   }
 
-useEffect(() => {
-  progreeHandler();
-}, [])
+// useEffect(() => {
+//   progreeHandler();
+// }, [])
 
 
 
@@ -67,7 +68,7 @@ useEffect(() => {
       {uploaded ? null :
 
         <div className="bg">
-          <div className="uploader">
+          <div className= {file ? "uploader active" : "uploader" }>
             <div className='upload-drop'>
               <div className="upload-inner">
                 <div className='upload-img'>
@@ -84,16 +85,31 @@ useEffect(() => {
 
                 </div>
 
-                <div className='upload-txt'>
+                {/* <div className='upload-txt'>
                   {fileName ?
-                    <p>{fileName}</p> : <p>{progressState}</p>}</div>
+                    <p>{fileName}</p> : <p>{progressState}</p>}</div> */}
               </div>
             </div>
-            <div className='upload-loader'>
-              <div className="progress-bar" style={{width:progress}}>
+            <div className="highlighted-txt">
+              {file ? 
+              <p>{progressState}</p>
+              
+              : <p>Drag and drop browse files to upload</p>
+              
+              }
+             </div>
 
+             {file ?
+            <div className='upload-loader'>
+              <div className="progress-bar" style={{width:progress}}> 
               </div>
             </div>
+            : null}
+            
+             
+               
+
+              
           </div>
         </div>
 

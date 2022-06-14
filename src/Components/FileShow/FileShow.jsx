@@ -119,7 +119,7 @@ const convertCsvToExcelBuffer = (csvString) => {
         
             <div className="header">
             <h6>
-              Uploaded 8 FIles
+              Uploaded {Array.from(file).length} Files
             </h6>
 
             <div className='input-group'>

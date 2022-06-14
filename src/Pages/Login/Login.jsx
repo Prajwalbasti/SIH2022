@@ -60,7 +60,7 @@ function Login() {
          await auth.signInWithEmailAndPassword(email, password)
          .then(res => {
              console.log(res);             
-             navigate("/upload");
+             navigate("/");
          })
          .catch((error) => {
           seterror_msg("");
@@ -104,7 +104,7 @@ function Login() {
             var user = result.user;
           localStorage.setItem("auth", token);
 
-            navigate("/upload");
+            navigate("/");
             return db.collection("Hospital").doc(result.user.uid).set({
               Name: user.displayName,
               Email: user.email,

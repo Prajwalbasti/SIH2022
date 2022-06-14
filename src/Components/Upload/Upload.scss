@@ -12,6 +12,15 @@
         align-items: center;
     }
 
+    .highlighted-txt{
+        p{
+            font-size: 1.25em;
+            color: var(--blue2);
+            font-weight: 600;
+            margin-top: 20px;
+        }
+    }
+
     .upload-img{
         display: flex;
         position:relative;
@@ -42,7 +51,14 @@
         justify-content:center ;
         align-items: center;
         align-content: center;
+        // border: 5px dashed var(--gray1);
+        outline:5px dashed var(--gray1);
+outline-offset:-20px;
 
+        &.active{
+            // border: 0px !important;
+            outline: none;
+        }
 
         .upload-drop{
             background-color: #D6ECFD;
