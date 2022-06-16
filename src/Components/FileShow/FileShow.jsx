@@ -17,25 +17,28 @@ import { read, writeFileXLSX } from "xlsx";
 /* load the codepage support library for extended support with older formats  */
 import { set_cptable } from "xlsx";
 import * as cptable from 'xlsx/dist/cpexcel.full.mjs';
+import { useEffect } from 'react'
 set_cptable(cptable);
 
 
 
-function FileShow({file, setData}) {
+function FileShow({file, setData, setStep, fileName, fileData, setFileName}) {
 
   const [selectAll, setSelectAll] = useState(false); 
   const navigate = useNavigate();
-  
-  
+
+  const [fileDisplay, setFileDisplay] = useState(fileName); 
+  const [fileNum, setFileNum] = useState(fileName.length);
 
 const changeSelect = () => {
   setSelectAll(prev => !prev);
 }
 
-const EditFile = (file) => {
+const EditFile = (name) => {
   
     // var xl2json = new ExcelToJSON();
-    parseExcel(file);
+    // parseExcel(file);
+setData(fileData.get(name));
   
 }
 
@@ -43,6 +46,14 @@ const EditFile = (file) => {
 const SaveFile = (file) => {
   
 
+}
+
+const DeleteFile = async(name) => {
+  var filteredArray = fileDisplay.filter(function(e) { return e !== name })
+
+  setFileDisplay(filteredArray)
+  setFileNum(filteredArray.length)
+  setFileName(filteredArray)
 }
 
 
@@ -72,7 +83,7 @@ const parseExcel = function (file) {
       console.log(finalCsvString);
       
       setData(duplicatesRemovedCsvArray);
-      navigate("/table")
+      // navigate("/table")
       // convertCsvToExcelBuffer(finalCsvString);
     });
 
@@ -119,7 +130,7 @@ const convertCsvToExcelBuffer = (csvString) => {
         
             <div className="header">
             <h6>
-              Uploaded {Array.from(file).length} Files
+              Uploaded  {fileNum ? fileNum : null} Files
             </h6>
 
             <div className='input-group'>
@@ -129,13 +140,13 @@ const convertCsvToExcelBuffer = (csvString) => {
             </div>
             </div>
             <div className="body">
-                {file ? Array.from(file).map((data, key) => {
-                  return <div  className={selectAll ? 'details selected' : 'details'}>
-                  <p>{data.name}</p>
+                {fileDisplay ? fileDisplay.map((data, key) => {
+                  return <div key ={key}  className={selectAll ? 'details selected' : 'details'}>
+                  <p>{data}</p>
                   <div className="icons">
-                <img src={Edit} alt="" onClick={() => EditFile(data)}/>
+                <img src={Edit} alt="" onClick={() => {EditFile(data); setStep(3)}}/>
                 <img src={Save} alt="" />
-                <img src={Delete} alt="" />
+                <img src={Delete} alt="" onClick={() => {DeleteFile(data);}} />
                   </div>
               </div>
                 }): null}

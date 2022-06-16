@@ -6,6 +6,7 @@
     border: solid 2px var(--gray1);
     border-radius: 20px;
     overflow: hidden;
+    
 
     .header{
         display: flex;
@@ -27,7 +28,6 @@
             justify-content: center;
 
             // checkbox color
-
             
 
 
@@ -47,12 +47,14 @@
         display: flex;
         flex-direction: column;
         overflow: hidden;
+        max-height: 400px;
+        overflow-y: scroll;
 
         .details{
             display: flex;
             padding: 10px;
             border-bottom: solid 2px var(--gray1);
-
+            cursor: pointer;
             .icons{
                 margin-left: auto;
 

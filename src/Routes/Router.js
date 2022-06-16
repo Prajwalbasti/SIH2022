@@ -4,6 +4,7 @@ import {
     BrowserRouter,
     Routes,
     Route,
+    useLocation
 } from "react-router-dom";
 
 import TablePage from '../Pages/TablePage/TablePage';
@@ -12,16 +13,26 @@ import UploadedFiles from '../Pages/UploadedFiles/UploadedFiles';
 import Login from '../Pages/Login/Login';
 import Register from '../Pages/Register/Register';
 import Home from '../Pages/Home/Home';
+import Sidebar from '../Components/Sidebar/Sidebar';
+
 
 function Router() {
 
-    const [data, setData] = useState([])
+    
+
+    const [selected, setSelected] = useState("home")
+    const location = useLocation();
+
+    console.log(location);
 
     return (
         <div>
+
+            {location && location.pathname == "/" ||  "lol" ? <Sidebar selected={selected} setSelected={setSelected} /> :  null}
+
             <Routes>
-                <Route path="table" element={<TablePage data={data} />}></Route>
-                <Route path="upload" element={<Upload setData={setData}/>}></Route>
+                {/* <Route path="table" element={<TablePage data={data} />}></Route> */}
+                <Route path="upload" element={<Upload />}></Route>
                 <Route path="uploaded" element={<UploadedFiles />}></Route>
                 <Route path="login" element={<Login />}></Route>
                 <Route path="register" element={<Register />}></Route>
