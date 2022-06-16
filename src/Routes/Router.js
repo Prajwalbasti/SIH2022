@@ -28,7 +28,7 @@ function Router() {
     return (
         <div>
 
-            {location && location.pathname == "/" ||  "lol" ? <Sidebar selected={selected} setSelected={setSelected} /> :  null}
+            {location && location.pathname == "/"  ? <Sidebar selected={selected} setSelected={setSelected} /> :  null}
 
             <Routes>
                 {/* <Route path="table" element={<TablePage data={data} />}></Route> */}

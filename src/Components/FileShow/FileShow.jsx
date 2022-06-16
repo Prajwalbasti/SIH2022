@@ -128,6 +128,9 @@ const convertCsvToExcelBuffer = (csvString) => {
   return (
     <div className='file-show'>
         
+        <div className="btn-div">
+          <button onClick={() => setStep(1)}>BACK</button>
+        </div>
             <div className="header">
             <h6>
               Uploaded  {fileNum ? fileNum : null} Files
