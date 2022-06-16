@@ -49,11 +49,11 @@ function Upload() {
   const progreeHandler = ()=>{
     
     setTimeout(() => {
-      setProgressState('processing the file');
+      setProgressState('Processing the file');
       setProgress('30%');
     }, 0);
     setTimeout(() => {
-      setProgressState('detecting duplicates');
+      setProgressState('Detecting duplicates');
       setProgress('40%');
     }, 1000);
     setTimeout(() => {
@@ -65,11 +65,11 @@ function Upload() {
       setProgress('70%');
     }, 3000);
     setTimeout(() => {
-      setProgressState('getting things done');
+      setProgressState('Getting things done');
       setProgress('85%');
     }, 4000);
     setTimeout(() => {
-      setProgressState('file is ready');
+      setProgressState('File is ready');
       setProgress('100%');
       // setUploaded(true);
       setStep(2);

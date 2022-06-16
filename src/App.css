@@ -29,3 +29,26 @@ body{
     font-size: 13px;
   }
 }
+
+
+/* width */
+::-webkit-scrollbar {
+  width: 7px;
+  border-radius: 50px;
+  
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: white;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #D6ECFD;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #cbe7fd;
+}

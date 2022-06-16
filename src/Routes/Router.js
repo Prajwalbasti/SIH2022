@@ -14,6 +14,7 @@ import Login from '../Pages/Login/Login';
 import Register from '../Pages/Register/Register';
 import Home from '../Pages/Home/Home';
 import Sidebar from '../Components/Sidebar/Sidebar';
+import './Router.scss'
 
 
 function Router() {
@@ -26,18 +27,24 @@ function Router() {
     console.log(location);
 
     return (
-        <div>
+        <div className='Router'>
 
-            {location && location.pathname == "/"  ? <Sidebar selected={selected} setSelected={setSelected} /> :  null}
+            {location && location.pathname === "/"  ?
+            <div className="sidebarWrapper">
+                 <Sidebar selected={selected} setSelected={setSelected} />
+            </div>
+             :  null}
 
-            <Routes>
-                {/* <Route path="table" element={<TablePage data={data} />}></Route> */}
-                <Route path="upload" element={<Upload />}></Route>
-                <Route path="uploaded" element={<UploadedFiles />}></Route>
-                <Route path="login" element={<Login />}></Route>
-                <Route path="register" element={<Register />}></Route>
-                <Route path="/" element={<Home />}></Route>
-            </Routes>
+            <div className="pageWrapper">
+                <Routes>
+                    {/* <Route path="table" element={<TablePage data={data} />}></Route> */}
+                    <Route path="upload" element={<Upload />}></Route>
+                    <Route path="uploaded" element={<UploadedFiles />}></Route>
+                    <Route path="login" element={<Login />}></Route>
+                    <Route path="register" element={<Register />}></Route>
+                    <Route path="/" element={<Home />}></Route>
+                </Routes>
+            </div>
         </div>
     )
 }

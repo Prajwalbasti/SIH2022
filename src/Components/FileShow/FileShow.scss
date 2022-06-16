@@ -48,7 +48,7 @@
         flex-direction: column;
         overflow: hidden;
         max-height: 400px;
-        overflow-y: scroll;
+        overflow-y: auto;
 
         .details{
             display: flex;
