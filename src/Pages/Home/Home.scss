@@ -1,0 +1,16 @@
+.home{
+    padding: 0;
+    // width: 100%;
+    // overflow-x: hidden;
+    .right{
+        display: flex;
+        flex-direction: column;
+
+        .logoMain{
+            padding: 20px 0;
+            width: 100%;
+            display: flex;
+            justify-content: center;
+        }
+    }
+}
