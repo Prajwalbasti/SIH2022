@@ -5,6 +5,7 @@
     align-items: center;
     justify-content: center;
 
+    
     .content {
         width: 35%;
         background-color: var(--blue1);
@@ -29,10 +30,15 @@
             position: relative;
             align-items: center;
 
-            img{
+            .password{
                 position: absolute;
                 right: 10px;
-                width: 20px;
+                cursor: pointer;
+                
+                i{
+                    width: 25px;
+                    color: var(--blue2);
+                }
             }
         }
 
@@ -66,7 +72,7 @@
             border-radius: 20px;
             padding: 10px 15px;
             margin-top: 20px;
-
+            cursor: pointer;
             img{
                 width: 25px;
                 padding-right: 10px;
@@ -83,4 +89,17 @@
 
 .mt-1{
     margin-top: 10px;
+}
+
+.navigate{
+    a{
+        color: var(--blue2) !important; 
+        text-decoration: none;
+    }
+
+}
+.error{
+    p{
+        color: red !important;
+    }
 }

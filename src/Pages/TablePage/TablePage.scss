@@ -11,12 +11,18 @@
     display: flex;
     align-items: center;
     justify-content: flex-end;
-    button{
-        margin-left: 25px;
-        cursor: pointer;
-        background-color: transparent;
-        border: none;
+    .back-btn{
+            margin-right: auto;
+            color: var(--blue2);
+            font-size: 30px;
+            
     }
+    button{
+        cursor: pointer;
+            background-color: transparent;
+            border: none;
+    }
+    
     }
     
 

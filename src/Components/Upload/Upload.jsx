@@ -13,7 +13,7 @@ import { read, writeFileXLSX } from "xlsx";
 /* load the codepage support library for extended support with older formats  */
 import { set_cptable } from "xlsx";
 import * as cptable from 'xlsx/dist/cpexcel.full.mjs';
-import { useLocation, useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate, Navigate } from 'react-router-dom';
 set_cptable(cptable);
 
 
@@ -23,7 +23,7 @@ function Upload() {
 
 
   const [file, setFile] = useState();
-  const [fileName, setFileName] = useState();
+  const [fileName, setFileName] = useState([]);
   const [fileData, setFileData] = useState();
   
   const [step, setStep] = useState(1);
@@ -220,7 +220,7 @@ function Upload() {
 
 
   return (
-    <div className='upload'>
+      <div className='upload'>
 
       {location.pathname==='/dashboard/upload' ? 
         <div className="bg">
@@ -264,10 +264,14 @@ function Upload() {
 
 
       {location.pathname==='/dashboard/showList' ? <div className="uploaded">
+        {fileName.length == 0 ? <Navigate replace to="/dashboard/upload" /> : null}
         <FileShow setData={setData} setStep={setStep} file={file} fileName={fileName} fileData={fileData} setFileName={setFileName} />
       </div> : null}
 
-      {location.pathname==='/dashboard/showTable' ? <TablePage data={data} setStep={setStep} /> :  null}
+      {location.pathname==='/dashboard/showTable' ? <>
+      {data.length == 0 ? <Navigate replace to="/dashboard/upload" /> : null}
+      <TablePage data={data} setStep={setStep} />
+      </> :  null}
 
     </div>
   )

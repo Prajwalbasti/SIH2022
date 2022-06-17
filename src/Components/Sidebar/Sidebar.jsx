@@ -5,23 +5,42 @@ import profile from "../../Assets/profile.png"
 import setting from "../../Assets/setting.png"
 import logout from "../../Assets/logout.png"
 import Home from "../../Assets/Home.svg"
-import {useNavigate} from "react-router-dom"
+import {useNavigate, useLocation} from "react-router-dom"
 import logo from './../../Assets/logoMini.svg'
+import { useEffect } from 'react'
 // import {GrHomeRounded} from 'react-icons/gr'
 // import {IoListSharp} from 'react-icons/io'
 
 
 const items = [
-    { name: 'home', label: 'Home',component:<i class="bi bi-house-door"></i>, img: Home, href:"/dashboard/upload" },
-    { name: 'list', label: 'Master Rate list',component:<i class="bi bi-list-task"></i>, img: list, href:"/master-list" },
-    { name: 'profile', label: 'Profile',component:<i class="bi bi-person"></i>, img: profile,href:"/profile" },
-    { name: 'setting', label: 'Settings',component:<i class="bi bi-gear"></i>, img: setting, href:"/setting" }]
+    { name: 'home', label: 'Home',component:<i className="bi bi-house-door"></i>, img: Home, href:"/dashboard/upload" },
+    { name: 'list', label: 'Master Rate list',component:<i className="bi bi-list-task"></i>, img: list, href:"/master-list" },
+    { name: 'profile', label: 'Profile',component:<i className="bi bi-person"></i>, img: profile,href:"/profile" },
+    { name: 'setting', label: 'Settings',component:<i className="bi bi-gear"></i>, img: setting, href:"/setting" }]
     
 
 
 function Sidebar({selected, setSelected}) {
     
     const navigate = useNavigate();
+    const location = useLocation();
+
+    useEffect(() => {
+        switch(location.pathname){
+            case "/dashboard/upload": 
+                setSelected("home");
+                break;
+            case "/master-list": 
+                setSelected("list");
+                break;
+            case "/profile": 
+                setSelected("profile");
+                break;
+            case "setting":
+                setSelected("setting");
+                break;
+        }
+    }, [])
 
     return (
     <div className='sidebar'>
@@ -46,7 +65,7 @@ function Sidebar({selected, setSelected}) {
             </ul>
         </div>
         <div className="footer">
-            <div className="logout">
+            <div className="logout" onClick={() => {localStorage.clear(); window.location.reload(false)}}>
                 <img src={logout} alt="logout" />
                 <p>Logout</p>
             </div>

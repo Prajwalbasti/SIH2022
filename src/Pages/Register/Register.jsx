@@ -3,7 +3,7 @@ import { db, auth } from "../../firebase/firebase";
 import firebase from "firebase";import "./Register.scss"
 import google_logo from "../../Assets/Google.png"
 import Input from '../../Components/Input/Input'
-import {Link, useNavigate} from "react-router-dom";
+import {Link, useNavigate, Navigate} from "react-router-dom";
 
 function Register() {
 
@@ -115,8 +115,8 @@ function Register() {
           var credential = result.credential;
           var token = credential.accessToken;
           var user = result.user;
-          localStorage.setItem("auth", token);
-          navigate("/upload");
+          localStorage.setItem("npg_auth", token);
+          navigate("/");
           return db.collection("Hospital").doc(result.user.uid).set({
             Name: user.displayName,
             Email: user.email,
@@ -127,13 +127,19 @@ function Register() {
        
     };
 
+    const npg_auth = localStorage.getItem('npg_auth');
+
   return (
     <div className='register'>
+      {npg_auth ? <Navigate replace to="/" /> : null}
         <div className="content">
             <h2>
                 Create Account
             </h2>
-            <Link to="/Login">Already have an Account?Signin</Link>
+            <div className="mt-1 navigate">
+
+            <Link to="/Login">Already have an Account? Signin</Link>
+            </div>
 
         <div className="form">        
                 
@@ -157,7 +163,7 @@ function Register() {
             
 
                 <div class="input_section">
-                    <Input type="text" placeholder="Email" onChange={(e) => setEmail(e.target.value)} />                  
+                    <Input type="email" placeholder="Email" value={email} onChange={(e) => setEmail(e.target.value)} />                  
                 </div>
                 <div className="input_section">
                 <Input type="password" placeholder="Create Password" value={password} onChange={(e) => setPassword(e.target.value)} />
@@ -170,7 +176,9 @@ function Register() {
                
         </div>
 
-        <div className="error"> {error_msg}</div>
+        <div className="error"><p>
+        {error_msg}
+          </p> </div>
                
 
         <button onClick={SignUp} className='signin'>

@@ -14,6 +14,50 @@
         background-color: var(--blue2);
         border-top-left-radius: 20px;
         border-top-right-radius: 20px;
+        align-items: center;
+
+        .controls-c{
+            display: flex;
+            align-items: flex-end;
+            margin-left: auto;
+        }
+
+        .controls{
+            display: flex;
+            
+            .box-c{
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                margin: 0 10px;
+                justify-content: center;
+                cursor: pointer;
+                .box{
+                    background-color: white;
+                    padding: 3px;
+                    border: solid 2px var(--gray1);
+                    border-radius: 3px;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    img{
+                        height: 15px;
+                    }
+                    
+                }
+                p{
+                    color: white;
+                }
+            }
+
+        }
+
+        i{
+            color: white;
+            font-size: 25px;
+            margin-right: 10px;
+            cursor: pointer;
+        }
 
         h6{
             font-size: 1.25em;
@@ -50,11 +94,29 @@
         max-height: 400px;
         overflow-y: auto;
 
+        .file-div{
+
+            border-bottom: solid 2px var(--gray1);
+            padding: 10px;
+
+            .error-div{
+                p{
+                    color: red !important;
+                    font-size: 0.875em;
+                    padding-left: 20px;
+                }
+            }
+        }
+
         .details{
             display: flex;
             padding: 10px;
-            border-bottom: solid 2px var(--gray1);
+            border-radius: 10px;
             cursor: pointer;
+            p{
+                color: var(--blue2);
+                font-weight: 600;
+            }
             .icons{
                 margin-left: auto;
 
@@ -66,7 +128,7 @@
         }
 
         .selected{
-            background-color: #f7f7f7;
+            background-color: var(--blue1);
         }
     }
 }

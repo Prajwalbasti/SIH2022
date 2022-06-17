@@ -4,8 +4,10 @@ import {
     BrowserRouter,
     Routes,
     Route,
-    useLocation
+    useLocation,
 } from "react-router-dom";
+import { Navigate } from 'react-router-dom'
+
 
 import TablePage from '../Pages/TablePage/TablePage';
 import Upload from '../Components/Upload/Upload';
@@ -15,6 +17,8 @@ import Register from '../Pages/Register/Register';
 import Home from '../Pages/Home/Home';
 import Sidebar from '../Components/Sidebar/Sidebar';
 import './Router.scss'
+import Protected from '../Protected/Protected';
+import NotFound from '../Pages/NotFound/NotFound';
 
 
 function Router() {
@@ -24,12 +28,13 @@ function Router() {
     const [selected, setSelected] = useState("home")
     const location = useLocation();
 
-    console.log(location);
-
+    
     return (
         <div className='Router'>
 
-            {location && location.pathname !== "/"  ?
+            {console.log(location)}
+            
+            {location && (location.pathname == "/dashboard/upload" || location.pathname == "/dashboard/showList" || location.pathname == "/dashboard/showTable" || location.pathname ==  "/master-list"  )  ?
             <div className="sidebarWrapper">
                  <Sidebar selected={selected} setSelected={setSelected} />
             </div>
@@ -37,12 +42,15 @@ function Router() {
 
             <div className="pageWrapper">
                 <Routes>
-                    {/* <Route path="table" element={<TablePage data={data} />}></Route> */}
                     <Route path="upload" element={<Upload />}></Route>
                     <Route path="uploaded" element={<UploadedFiles />}></Route>
                     <Route path="login" element={<Login />}></Route>
                     <Route path="register" element={<Register />}></Route>
-                    <Route path="/dashboard/:id" element={<Home />}></Route>
+                    <Route path="dashboard/:id" element={<Protected cmp={Home} />}></Route>
+                    <Route path="/" element={<Navigate replace to="dashboard/upload" />} ></Route>
+                    <Route path="*" element={<NotFound />} ></Route>
+
+                
                 </Routes>
             </div>
         </div>

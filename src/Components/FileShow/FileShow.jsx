@@ -13,7 +13,6 @@ import * as XLSX from 'xlsx/xlsx.mjs';
 
 /* load 'fs' for readFile and writeFile support */
 import { read, writeFileXLSX } from "xlsx";
-
 /* load the codepage support library for extended support with older formats  */
 import { set_cptable } from "xlsx";
 import * as cptable from 'xlsx/dist/cpexcel.full.mjs';
@@ -26,6 +25,7 @@ function FileShow({file, setData, setStep, fileName, fileData, setFileName}) {
 
   const [selectAll, setSelectAll] = useState(false); 
   const navigate = useNavigate();
+  const [selectedFiles, setSelectedFiles] = useState([]);
 
   const [fileDisplay, setFileDisplay] = useState(fileName); 
   const [fileNum, setFileNum] = useState(fileName.length);
@@ -34,16 +34,20 @@ function FileShow({file, setData, setStep, fileName, fileData, setFileName}) {
 
 const changeSelect = () => {
   setSelectAll(prev => !prev);
+  
 }
+
 
 const EditFile = (name) => {
   
-    // var xl2json = new ExcelToJSON();
-    // parseExcel(file);
 setData(fileData.get(name));
   
 }
 
+const deleteAll = () => {
+  setFileDisplay([]);
+  setFileNum("0");
+}
 
 const SaveFile = (file) => {
   
@@ -52,7 +56,6 @@ const SaveFile = (file) => {
 
 const DeleteFile = async(name) => {
   var filteredArray = fileDisplay.filter(function(e) { return e !== name })
-
   setFileDisplay(filteredArray)
   setFileNum(filteredArray.length)
   setFileName(filteredArray)
@@ -132,26 +135,54 @@ const convertCsvToExcelBuffer = (csvString) => {
         
        
             <div className="header">
+              <div className="back-btn" onClick={() => navigate("/dashboard/upload")}>
+
+            <i class="bi bi-arrow-left-short"></i>
+              </div>
             <h6>
-              Uploaded  {fileNum ? fileNum : null} Files
+              {fileNum ? fileNum : null} Files
             </h6>
 
-            <div className='input-group'>
-            <input type="checkbox" name="select-all" id="select-all" onChange={() => changeSelect()} />
-            
+<div className="controls-c">
+<div className='input-group'>
+            <input type="checkbox" name="select-all" id="select-all" onChange={() => changeSelect()} />            
             <label htmlFor='select-all'>Select All</label>
             </div>
+            {
+              selectAll ? <div className="controls">
+                <div className="box-c">
+                <div className="box">
+                <img src={Save} alt="" />
+                </div>
+                <p>Save</p>
+                </div>
+                <div className="box-c" onClick={() => deleteAll()}>
+                <div className="box">
+                <img src={Delete} alt="" />
+                </div>
+                <p>Delete</p>
+                </div>
+              </div> 
+              : null
+            }
+</div>
+              
             </div>
             <div className="body">
                 {fileDisplay ? fileDisplay.map((data, key) => {
-                  return <div key ={key}  className={selectAll ? 'details selected' : 'details'}>
+                  return <div className="file-div">
+   <div key ={key}  className={selectAll ? 'details selected' : 'details'} >
                   <p>{data}</p>
+                  <div className="error-div">
+                  <p><i class="bi bi-info-circle"></i> There is a new "Provider.</p>
+                  </div>
                   <div className="icons">
                 <img src={Edit} alt="" onClick={() => {EditFile(data); navigate('/dashboard/showTable')}}/>
                 <img src={Save} alt="" />
                 <img src={Delete} alt="" onClick={() => {DeleteFile(data);}} />
                   </div>
               </div>
+                  </div>
                 }): null}
                 
 

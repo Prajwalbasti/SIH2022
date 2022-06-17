@@ -6,7 +6,7 @@ import "./Login.scss"
 import visibility from "../../Assets/eye-closed.png"
 import google_logo from "../../Assets/Google.png"
 
-import {Link, useNavigate} from "react-router-dom"
+import {Link, useNavigate, Navigate} from "react-router-dom"
 
 function Login() {
 
@@ -102,7 +102,7 @@ function Login() {
     
             var token = credential.accessToken;
             var user = result.user;
-          localStorage.setItem("auth", token);
+          localStorage.setItem("npg_auth", token);
 
             navigate("/");
             return db.collection("Hospital").doc(result.user.uid).set({
@@ -115,17 +115,17 @@ function Login() {
           
       };
 
-      const togglePassword = () => {
-        setPasswordShown(!passwordShown);
-      };
     
       const signInButton = () => {
         document.getElementById("container").classList.remove("right-panel-active");
         seterror_msg("");
       };
 
+      const npg_auth = localStorage.getItem("npg_auth")
+
   return (
     <div className='login'>
+      {npg_auth ? <Navigate replace to="/" /> : null}
         <div className="content">
             <h2>
                 Welcome Back
@@ -149,28 +149,39 @@ function Login() {
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
                     />
-                <img onClick={togglePassword}  src={visibility} />
+                    <div className="password" onClick={() => setPasswordShown(prev => !prev)}>
+                    {passwordShown ? 
+                <i class="bi bi-eye-slash" ></i>      
+                :
+                <i class="bi bi-eye"></i>
+              }
+                    </div>
+                    
                 </div>
                 <div className="forgot">
             <a>Forgot Password?</a>
         </div>
         </div>
 
-        <div className="error"> {error_msg}</div>
+        <div className="error"> 
+        <p>
+          {error_msg}
+          </p>
+          </div>
 
         <button onClick={(e) => Login(e)} className='signin'>
             Sign In
         </button>
 
-        <p className='mt-1'>
+        <p className='mt-1 navigate'>
         <Link to="/Register">New Here? Create Account</Link>
         </p>
 
         
         <p className='mt-1' >or</p>
         
-        <div className="s-google mt-1">
-            <img  onClick={google} src={google_logo} alt="google image" />
+        <div className="s-google mt-1" onClick={ google}>
+            <img   src={google_logo} alt="google image" />
            
             <p>Sign in with Google</p>
         </div>
