@@ -12,7 +12,7 @@ import logo from './../../Assets/logoMini.svg'
 
 
 const items = [
-    { name: 'home', label: 'Home',component:<i class="bi bi-house-door"></i>, img: Home, href:"/" },
+    { name: 'home', label: 'Home',component:<i class="bi bi-house-door"></i>, img: Home, href:"/dashboard/upload" },
     { name: 'list', label: 'Master Rate list',component:<i class="bi bi-list-task"></i>, img: list, href:"/master-list" },
     { name: 'profile', label: 'Profile',component:<i class="bi bi-person"></i>, img: profile,href:"/profile" },
     { name: 'setting', label: 'Settings',component:<i class="bi bi-gear"></i>, img: setting, href:"/setting" }]

@@ -13,6 +13,7 @@ import { read, writeFileXLSX } from "xlsx";
 /* load the codepage support library for extended support with older formats  */
 import { set_cptable } from "xlsx";
 import * as cptable from 'xlsx/dist/cpexcel.full.mjs';
+import { useLocation, useNavigate } from 'react-router-dom';
 set_cptable(cptable);
 
 
@@ -36,6 +37,19 @@ function Upload() {
 
   const [progressState,setProgressState] = useState('File Uploaded')
 
+  const navigate = useNavigate();
+
+  const location = useLocation();
+
+
+  // useEffect
+  useEffect(()=>{
+    setProgress('20%')
+    setProgressState('File Uploaded')
+    setUploaded(false);  
+  },[location.pathname])
+
+
   const handleUpload = async(e) => {
     // setFile(e.target.files);
     await setUploaded(true);  
@@ -44,6 +58,7 @@ function Upload() {
   await xl2json.parseExcel(e.target.files[0]);
   progreeHandler();
   }
+
 
 
   const progreeHandler = ()=>{
@@ -73,8 +88,11 @@ function Upload() {
       setProgress('100%');
       // setUploaded(true);
       setStep(2);
+      navigate('/dashboard/showList')
     }, 5000);
   }
+
+
 
 
 
@@ -204,7 +222,7 @@ function Upload() {
   return (
     <div className='upload'>
 
-      {step == 1 ? 
+      {location.pathname==='/dashboard/upload' ? 
         <div className="bg">
           <div className= {uploaded ? "uploader active" : "uploader" }>
             <div className='upload-drop'>
@@ -245,11 +263,11 @@ function Upload() {
       }
 
 
-      {step == 2 ? <div className="uploaded">
+      {location.pathname==='/dashboard/showList' ? <div className="uploaded">
         <FileShow setData={setData} setStep={setStep} file={file} fileName={fileName} fileData={fileData} setFileName={setFileName} />
       </div> : null}
 
-      {step == 3 ? <TablePage data={data} setStep={setStep} /> :  null}
+      {location.pathname==='/dashboard/showTable' ? <TablePage data={data} setStep={setStep} /> :  null}
 
     </div>
   )

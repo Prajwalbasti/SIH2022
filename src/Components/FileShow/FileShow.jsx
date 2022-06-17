@@ -30,6 +30,8 @@ function FileShow({file, setData, setStep, fileName, fileData, setFileName}) {
   const [fileDisplay, setFileDisplay] = useState(fileName); 
   const [fileNum, setFileNum] = useState(fileName.length);
 
+  // const navigate = useNavigate();
+
 const changeSelect = () => {
   setSelectAll(prev => !prev);
 }
@@ -128,9 +130,7 @@ const convertCsvToExcelBuffer = (csvString) => {
   return (
     <div className='file-show'>
         
-        <div className="btn-div">
-          <button onClick={() => setStep(1)}>BACK</button>
-        </div>
+       
             <div className="header">
             <h6>
               Uploaded  {fileNum ? fileNum : null} Files
@@ -147,7 +147,7 @@ const convertCsvToExcelBuffer = (csvString) => {
                   return <div key ={key}  className={selectAll ? 'details selected' : 'details'}>
                   <p>{data}</p>
                   <div className="icons">
-                <img src={Edit} alt="" onClick={() => {EditFile(data); setStep(3)}}/>
+                <img src={Edit} alt="" onClick={() => {EditFile(data); navigate('/dashboard/showTable')}}/>
                 <img src={Save} alt="" />
                 <img src={Delete} alt="" onClick={() => {DeleteFile(data);}} />
                   </div>

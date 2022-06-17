@@ -29,7 +29,7 @@ function Router() {
     return (
         <div className='Router'>
 
-            {location && location.pathname === "/"  ?
+            {location && location.pathname !== "/"  ?
             <div className="sidebarWrapper">
                  <Sidebar selected={selected} setSelected={setSelected} />
             </div>
@@ -42,7 +42,7 @@ function Router() {
                     <Route path="uploaded" element={<UploadedFiles />}></Route>
                     <Route path="login" element={<Login />}></Route>
                     <Route path="register" element={<Register />}></Route>
-                    <Route path="/" element={<Home />}></Route>
+                    <Route path="/dashboard/:id" element={<Home />}></Route>
                 </Routes>
             </div>
         </div>
