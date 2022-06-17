@@ -173,9 +173,9 @@ const convertCsvToExcelBuffer = (csvString) => {
                   return <div className="file-div">
    <div key ={key}  className={selectAll ? 'details selected' : 'details'} >
                   <p>{data}</p>
-                  <div className="error-div">
-                  <p><i class="bi bi-info-circle"></i> There is a new "Provider.</p>
-                  </div>
+                  {/* <div className="error-div">
+                  <p><i class="bi bi-info-circle"></i> There is a new "Provider"</p>
+                  </div> */}
                   <div className="icons">
                 <img src={Edit} alt="" onClick={() => {EditFile(data); navigate('/dashboard/showTable')}}/>
                 <img src={Save} alt="" />

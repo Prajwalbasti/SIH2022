@@ -190,8 +190,8 @@ function Register() {
         
         <p className='mt-1' >or</p>
         
-        <div className="s-google mt-1">
-            <img onClick={google} src={google_logo} alt="google image" />
+        <div className="s-google mt-1" onClick={google}>
+            <img  src={google_logo} alt="google image" />
             <p>Sign up with Google</p>
         </div>
 

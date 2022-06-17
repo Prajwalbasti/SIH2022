@@ -59,7 +59,8 @@ function Login() {
 
          await auth.signInWithEmailAndPassword(email, password)
          .then(res => {
-             console.log(res);             
+             console.log(res);
+             localStorage.setItem("npg_auth", (Math.random() + 1).toString(36).substring(7))             
              navigate("/");
          })
          .catch((error) => {
