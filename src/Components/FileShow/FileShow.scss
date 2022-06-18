@@ -100,10 +100,12 @@
             padding: 10px;
 
             .error-div{
+                display: flex;
+                align-items: center;
                 p{
                     color: red !important;
                     font-size: 0.875em;
-                    padding-left: 20px;
+                    padding-left: 10px;
                 }
             }
         }

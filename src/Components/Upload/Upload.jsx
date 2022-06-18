@@ -14,18 +14,19 @@ import { read, writeFileXLSX } from "xlsx";
 import { set_cptable } from "xlsx";
 import * as cptable from 'xlsx/dist/cpexcel.full.mjs';
 import { useLocation, useNavigate, Navigate } from 'react-router-dom';
+import {masterData} from "../../Utils/data.js"
+import stringSimilarity from "string-similarity"
 set_cptable(cptable);
-
 
 
 function Upload() {
 
 
-
   const [file, setFile] = useState();
   const [fileName, setFileName] = useState([]);
   const [fileData, setFileData] = useState();
-  
+  const [errorList, setErrorList] = useState([]);
+
   const [step, setStep] = useState(1);
 
   const [uploaded, setUploaded] = useState(false);
@@ -95,23 +96,18 @@ function Upload() {
 
 
 
-
   var ExcelToJSON = function () {
-    
-    this.parseExcel =  function (file) {
+    this.parseExcel = function (file) {
       var reader = new FileReader();
   
-
-
-      reader.onload = async function (e) {
+      reader.onload = function (e) {
         var data = e.target.result;
         var workbook = XLSX.read(data, {
           type: "binary",
           cellDates: true,
           dateNF: "mm/dd/yyyy;@",
         });
-
-        
+  
         //logic for JSON
         try {
           const sheetNames = workbook.SheetNames;
@@ -133,16 +129,25 @@ function Upload() {
               `${d.getMonth()}/${d.getDate()}/${d.getFullYear()}`
             );
           });
-
-      
-      
+  
+          for (const obj of json_Array) {
+            try {
+              const keys = Object.keys(obj);
+              for (const key of keys) {
+                obj[key] = obj[key].trim();
+              }
+            } catch (err) {
+                 // can ignore
+            }
+          }
+  
           for (const obj of json_Array) {
             json_Array = json_Array.filter(function (e) {
               return obj != e;
             });
             json_Array.push(obj);
           }
-  
+          // JSON.stringify(JSON.parse(json_Array));
           const unique_json_Array = json_Array.filter((value, index) => {
             const _value = JSON.stringify(value);
             return (
@@ -161,21 +166,43 @@ function Upload() {
           providerNames = Array.from(providerNames);
           const providerMap = new Map();
   
-      
           for (const providerName of providerNames) {
             let providerData = unique_json_Array.filter(function (e) {
               return e["Provider Name"] === providerName;
             });
             providerMap.set(providerName, providerData);
           }
-  
+          const errorSet = new Set();
           for (const providerName of providerNames) {
             const today = new Date();
             const today_plus_15 = new Date();
             today_plus_15.setDate(today_plus_15.getDate() + 15);
             const providerData = providerMap.get(providerName);
+            let i = 1;
             for (const data of providerData) {
-              data["InvoiceNo"] = "TBD";
+              let found = false;
+              let dataToMap;
+              for (const ms of masterData) {
+                if (!ms["ItemDescription2"]) {
+                  console.log(ms);
+                }
+                var similarity = stringSimilarity.compareTwoStrings(
+                  ms["Provider Name"],
+                  data["Provider Name"]
+                );
+                const isMatch = ms["ItemDescription2"].includes(
+                  data["Last Name"]
+                );
+                if (isMatch && similarity > 0.8) {
+                  found = true;
+                  dataToMap = ms;
+                  break;
+                }
+              }
+              if (!found) {
+                errorSet.add(providerName);
+              }
+              data["InvoiceNo"] = i;
               data["Customer"] = "LHI";
               data[
                 "InvoiceDate"
@@ -184,27 +211,36 @@ function Upload() {
                 "DueDate"
               ] = `${today_plus_15.getMonth()}/${today_plus_15.getDate()}/${today_plus_15.getFullYear()}`;
               data["Terms"] = "Net 15";
-              data["Location"] = "TBD";
+              data["Location"] = found ? dataToMap["Location"] : "-";
               data["ItemDescription1"] = data["Last Name"];
-              data["ItemDescription2"] = "from master table";
-              data["ServiceDate"] = data["Appointment Date"];
+              data["ItemDescription2"] = found
+                ? dataToMap["ItemDescription2"]
+                : "-";
+              data["Service Date"] = data["Appointment Date"];
               data["Taxable"] = "N";
               data["ItemQuantity"] = 1;
-              data["Rate"] = "from master table";
+              data["Rate"] = found ? dataToMap["Rate"] : -1;
               data["Amount"] = data["Rate"];
-              data["ProviderName"] = data["Provider Name"];
-              data["ProviderId"] = data["Provider Id"];
-              data["AppointmentDate"] = data["Appointment Date"]
-              data["LastName"] = data["Last Name"]
-
+              delete data["Provider Id"];
+              delete data["Last Name"];
+              delete data["Provider Name"];
+              delete data["Appointment Date"];
+              delete data["State"];
+              try {
+                delete data["Canceled Minus Appt"];
+              } catch (err) {
+                /// ignore
+              }
             }
+            i++;
           }
+          const errorArray = Array.from(errorSet);
+          console.log("error", errorArray); // provider names which have error
 
           setFileName(providerNames);
           setFileData(providerMap);
-          
-         
-
+          setErrorList(errorArray);
+          // download(providerMap.get(providerNames[2]), providerNames[2]);
         } catch (err) {
           console.log(err);
         }
@@ -217,7 +253,14 @@ function Upload() {
       reader.readAsBinaryString(file);
     };
   };
-
+  
+  const download = (jsonArray, name) => {
+    var worksheet = XLSX.utils.json_to_sheet(jsonArray);
+    const wb = XLSX.utils.book_new();
+    XLSX.utils.book_append_sheet(wb, worksheet);
+    XLSX.writeFile(wb, `${name}.xlsx`);
+  };
+  
 
   return (
       <div className='upload'>
@@ -246,7 +289,7 @@ function Upload() {
               {uploaded ? 
               <p>{progressState}</p>
               
-              : <p>Drag and drop browse files to upload</p>
+              : <p>Drag and drop or browse files to upload</p>
               
               }
              </div>
@@ -265,7 +308,7 @@ function Upload() {
 
       {location.pathname==='/dashboard/showList' ? <div className="uploaded">
         {fileName.length == 0 ? <Navigate replace to="/dashboard/upload" /> : null}
-        <FileShow setData={setData} setStep={setStep} file={file} fileName={fileName} fileData={fileData} setFileName={setFileName} />
+        <FileShow setData={setData} setStep={setStep} file={file} fileName={fileName} fileData={fileData} setFileName={setFileName} errorList={errorList} />
       </div> : null}
 
       {location.pathname==='/dashboard/showTable' ? <>

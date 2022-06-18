@@ -21,7 +21,7 @@ set_cptable(cptable);
 
 
 
-function FileShow({file, setData, setStep, fileName, fileData, setFileName}) {
+function FileShow({file, setData, setStep, fileName, fileData, setFileName, errorList}) {
 
   const [selectAll, setSelectAll] = useState(false); 
   const navigate = useNavigate();
@@ -49,10 +49,20 @@ const deleteAll = () => {
   setFileNum("0");
 }
 
-const SaveFile = (file) => {
-  
+const downloadAll = () => {
 
+    for(var a of fileName){
+      download(fileData.get(a), a);
+    }
 }
+
+
+const download = (jsonArray, name) => {
+  var worksheet = XLSX.utils.json_to_sheet(jsonArray);
+  const wb = XLSX.utils.book_new();
+  XLSX.utils.book_append_sheet(wb, worksheet);
+  XLSX.writeFile(wb, `${name}.xlsx`);
+};
 
 const DeleteFile = async(name) => {
   var filteredArray = fileDisplay.filter(function(e) { return e !== name })
@@ -61,73 +71,6 @@ const DeleteFile = async(name) => {
   setFileName(filteredArray)
 }
 
-
-const parseExcel = function (file) {
-  
-  var reader = new FileReader();
-
-  reader.onload = function (e) {
-    var data = e.target.result;
-    var workbook = XLSX.read(data, {
-      type: "binary",
-    });
-
-    workbook.SheetNames.forEach(function (sheetName) {
-      // Here is your object
-      var csv = XLSX.utils.sheet_to_csv(workbook.Sheets[sheetName], {
-        blankrows: false,
-      });
-
-      const csvArray = csv.split("\n");
-      
-      var duplicatesRemovedCsvArray = [...new Set(csvArray)];
-      
-      console.log(duplicatesRemovedCsvArray);
-
-      const finalCsvString = duplicatesRemovedCsvArray.join("\n");
-      console.log(finalCsvString);
-      
-      setData(duplicatesRemovedCsvArray);
-      // navigate("/table")
-      // convertCsvToExcelBuffer(finalCsvString);
-    });
-
-    //logic for JSON
-    workbook.SheetNames.forEach(function (sheetName) {
-      // Here is your object
-      var XL_row_object = XLSX.utils.sheet_to_row_object_array(
-        workbook.Sheets[sheetName]
-      );
-      var json_object = JSON.stringify(XL_row_object);
-      console.log(JSON.parse(json_object));
-      jQuery("#xlx_json").val(json_object);
-
-      // console.log(json_object);
-      
-    });
-
-
-  };
-
-  reader.onerror = function (ex) {
-    console.log(ex);
-  };
-
-  reader.readAsBinaryString(file);
-};
-
-
-
-
-const convertCsvToExcelBuffer = (csvString) => {
-  const arrayOfArrayCsv = csvString.split("\n").map((row) => {
-    return row.split(",");
-  });
-  const wb = XLSX.utils.book_new();
-  const newWs = XLSX.utils.aoa_to_sheet(arrayOfArrayCsv);
-  XLSX.utils.book_append_sheet(wb, newWs);
-  XLSX.writeFile(wb, "done.xlsx");
-};
 
 
   return (
@@ -152,15 +95,15 @@ const convertCsvToExcelBuffer = (csvString) => {
               selectAll ? <div className="controls">
                 <div className="box-c">
                 <div className="box">
-                <img src={Save} alt="" />
+                <img src={Save} alt="save all" onClick={() => downloadAll()} />
                 </div>
-                <p>Save</p>
+                <p>Save All</p>
                 </div>
                 <div className="box-c" onClick={() => deleteAll()}>
                 <div className="box">
-                <img src={Delete} alt="" />
+                <img src={Delete} alt="delete all" />
                 </div>
-                <p>Delete</p>
+                <p>Delete All</p>
                 </div>
               </div> 
               : null
@@ -173,12 +116,15 @@ const convertCsvToExcelBuffer = (csvString) => {
                   return <div className="file-div">
    <div key ={key}  className={selectAll ? 'details selected' : 'details'} >
                   <p>{data}</p>
-                  {/* <div className="error-div">
-                  <p><i class="bi bi-info-circle"></i> There is a new "Provider"</p>
-                  </div> */}
+                  
+                  { errorList && errorList.includes(data) ? 
+                    <div className="error-div">
+                    <p><i class="bi bi-info-circle"></i> There is a error in this file.</p>
+                  </div>: null
+                }
                   <div className="icons">
                 <img src={Edit} alt="" onClick={() => {EditFile(data); navigate('/dashboard/showTable')}}/>
-                <img src={Save} alt="" />
+                <img src={Save} alt="" onClick={() => {download(fileData.get(data), data)}}/>
                 <img src={Delete} alt="" onClick={() => {DeleteFile(data);}} />
                   </div>
               </div>

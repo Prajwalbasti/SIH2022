@@ -52,8 +52,8 @@
         align-items: center;
         align-content: center;
         // border: 5px dashed var(--gray1);
-        outline:3px dashed rgb(184, 167, 167);
-outline-offset:-20px;
+        outline:2px dashed rgb(184, 167, 167);
+outline-offset:-40px;
 
         &.active{
             // border: 0px !important;
@@ -63,8 +63,8 @@ outline-offset:-20px;
         .upload-drop{
             background-color: white;
             border-radius: 50%;
-            height: 20vw;
-            width: 20vw;
+            height: 18vw;
+            width: 18vw;
             display: flex;
             justify-content:center ;
             align-items: center;
@@ -75,8 +75,8 @@ outline-offset:-20px;
             background-color: white;
             border: 5px solid #ebe5e5;
             border-radius: 50%;
-            height: 16vw;
-            width: 16vw;
+            height: 14vw;
+            width: 14vw;
             display: flex;
             flex-direction: column;
             justify-content:center ;

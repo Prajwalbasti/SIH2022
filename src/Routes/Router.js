@@ -19,6 +19,8 @@ import Sidebar from '../Components/Sidebar/Sidebar';
 import './Router.scss'
 import Protected from '../Protected/Protected';
 import NotFound from '../Pages/NotFound/NotFound';
+import MasterList from '../Pages/MasterList/MasterList';
+import FeatureSoon from '../Pages/FeatureSoon/FeatureSoon';
 
 
 function Router() {
@@ -34,7 +36,7 @@ function Router() {
 
             {console.log(location)}
             
-            {location && (location.pathname == "/dashboard/upload" || location.pathname == "/dashboard/showList" || location.pathname == "/dashboard/showTable" || location.pathname ==  "/master-list"  )  ?
+            {location && (location.pathname == "/dashboard/upload" || location.pathname == "/dashboard/showList" || location.pathname == "/dashboard/showTable" || location.pathname ==  "/master-list" || location.pathname ==  "/profile" || location.pathname ==  "/setting"  )  ?
             <div className="sidebarWrapper">
                  <Sidebar selected={selected} setSelected={setSelected} />
             </div>
@@ -47,6 +49,10 @@ function Router() {
                     <Route path="login" element={<Login />}></Route>
                     <Route path="register" element={<Register />}></Route>
                     <Route path="dashboard/:id" element={<Protected cmp={Home} />}></Route>
+                    <Route path="master-list" element={<Protected cmp={MasterList} />}></Route>
+                    <Route path="profile" element={<Protected cmp={FeatureSoon} />}></Route>
+                    <Route path="setting" element={<Protected cmp={FeatureSoon} />}></Route>
+
                     <Route path="/" element={<Navigate replace to="dashboard/upload" />} ></Route>
                     <Route path="*" element={<NotFound />} ></Route>
 
