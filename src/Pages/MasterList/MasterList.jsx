@@ -4,7 +4,7 @@ import Table from '../../Components/Table/Table'
 import {masterData} from "../../Utils/data.js"
 import "./MasterList.scss"
 
-const headers = ["Provider Name", "Location", "Item Description 2", "Rate"]
+const headers = ["Provider Name",  "Item Description 2", "Rate"]
 
 function MasterList() {
   return (
@@ -22,7 +22,7 @@ function MasterList() {
                     
                     return <tr className={key%2 != 0 ? "color" : "non-color"} key={key}>
                          <td><input type="text" defaultValue={dat["Provider Name"]}/></td>
-                         <td><input type="text" defaultValue={dat.Location}/></td>
+                         {/* <td><input type="text" defaultValue={dat.Location}/></td> */}
                          <td><input type="text" defaultValue={dat.ItemDescription2}/></td>
                          <td><input type="text" defaultValue={dat.Rate}/></td>
                     </tr>

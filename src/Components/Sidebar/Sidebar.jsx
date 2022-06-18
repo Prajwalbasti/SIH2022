@@ -66,7 +66,7 @@ function Sidebar({selected, setSelected}) {
         </div>
         <div className="footer">
             <div className="logout" onClick={() => {localStorage.clear(); window.location.reload(false)}}>
-                <img src={logout} alt="logout" />
+            <i class="bi bi-box-arrow-left"></i>
                 <p>Logout</p>
             </div>
         </div>

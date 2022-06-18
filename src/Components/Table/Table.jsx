@@ -28,7 +28,7 @@ function Table({  data }) {
                          <td><input type="text" defaultValue={dat.Location} onChange={(e) => {dat.Location = e.target.value }} /></td>
                          <td><input type="text" defaultValue={dat.ItemDescription1} onChange={(e) => {dat.ItemDescription1 = e.target.value }} /></td>
                          <td><input type="text" defaultValue={dat.ItemDescription2} onChange={(e) => {dat.ItemDescription2 = e.target.value }} /></td>
-                         <td><input type="text" defaultValue={dat.ServiceDate} onChange={(e) => {dat.ServiceDate = e.target.value }} /></td>
+                         <td><input type="text" defaultValue={dat["Service Date"]} onChange={(e) => {dat["Service Date"] = e.target.value }} /></td>
                          <td><input type="text" defaultValue={dat.Taxable} onChange={(e) => {dat.Taxable = e.target.value }} /></td>
                          <td><input type="text" defaultValue={dat.ItemQuantity} onChange={(e) => {dat.ItemQuantity = e.target.value }} /></td>
                          <td><input type="text" defaultValue={dat.Rate} onChange={(e) => {dat.Rate = e.target.value }} /></td>

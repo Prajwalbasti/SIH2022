@@ -175,6 +175,7 @@ function Upload() {
           const errorSet = new Set();
           for (const providerName of providerNames) {
             const today = new Date();
+            console.log(today)
             const today_plus_15 = new Date();
             today_plus_15.setDate(today_plus_15.getDate() + 15);
             const providerData = providerMap.get(providerName);
@@ -206,10 +207,10 @@ function Upload() {
               data["Customer"] = "LHI";
               data[
                 "InvoiceDate"
-              ] = `${today.getMonth()}/${today.getDate()}/${today.getFullYear()}`;
+              ] = `${today.getMonth() + 1}/${today.getDate()}/${today.getFullYear()}`;
               data[
                 "DueDate"
-              ] = `${today_plus_15.getMonth()}/${today_plus_15.getDate()}/${today_plus_15.getFullYear()}`;
+              ] = `${today_plus_15.getMonth() + 1}/${today_plus_15.getDate()}/${today_plus_15.getFullYear()}`;
               data["Terms"] = "Net 15";
               data["Location"] = found ? dataToMap["Location"] : "-";
               data["ItemDescription1"] = data["Last Name"];
