@@ -54,13 +54,13 @@ function Register() {
     const SignUp = (event) => {
       event.preventDefault();
        if (password.length < 6) {
-        setPassword("");
-        setPassword1("");
+        // setPassword("");
+        // setPassword1("");
         seterror_msg("Please use a strong password, min. 6 characters");
       } else if (password !== password1) {
         seterror_msg("Passwords do not match");
-        setPassword("");
-        setPassword1("");
+      //   setPassword("");
+      //   setPassword1("");
       } else if (username === "") {
         seterror_msg("Please Enter your First Name");
       } else if (lastname === "") {
@@ -70,12 +70,15 @@ function Register() {
         auth
           .createUserWithEmailAndPassword(email, password)
           .then((cred) => {
+            
+            navigate("/login");
             return db.collection("Hospital").doc(cred.user.uid).set({
               Name: username,
               Lastname: lastname,
               Email: email,         
             });
-            navigate("/login");
+            
+            
           })
           .catch((error) => {
             seterror_msg("");

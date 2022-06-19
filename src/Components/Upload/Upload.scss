@@ -17,13 +17,19 @@
             font-size: 1.25em;
             color: var(--blue2);
             font-weight: 600;
-            margin-top: 20px;
+            margin-top: 30px;
         }
     }
     
     .upload-img{
         display: flex;
+        align-items: center;
+        justify-content: center;
         position:relative;
+
+        img{
+            width: 85%;
+        }
         
         #input1{
             
@@ -42,7 +48,7 @@
     
     .uploader{
         height: 30vw;
-        border-radius: 40px;
+        border-radius: 25px;
         width: 60%;
         background-color: #D6ECFD;
         display: flex;
@@ -63,8 +69,8 @@ outline-offset:-40px;
         .upload-drop{
             background-color: white;
             border-radius: 50%;
-            height: 18vw;
-            width: 18vw;
+            height: 16vw;
+            width: 16vw;
             display: flex;
             justify-content:center ;
             align-items: center;
@@ -75,8 +81,8 @@ outline-offset:-40px;
             background-color: white;
             border: 5px solid #ebe5e5;
             border-radius: 50%;
-            height: 14vw;
-            width: 14vw;
+            height: 12vw;
+            width: 12vw;
             display: flex;
             flex-direction: column;
             justify-content:center ;

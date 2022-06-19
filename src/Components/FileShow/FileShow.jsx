@@ -1,8 +1,9 @@
 import React, {useState}from 'react'
 import "./FileShow.scss"
 import Edit from "../../Assets/Edit.png"
-import Save from "../../Assets/Save.png"
+import Save from "../../Assets/Download.png"
 import Delete from "../../Assets/Delete.png"
+import Check from "../../Assets/Check.png"
 
 import {useNavigate} from "react-router-dom"
 
@@ -88,8 +89,12 @@ const DeleteFile = async(name) => {
 
 <div className="controls-c">
 <div className='input-group'>
-            <input type="checkbox" name="select-all" id="select-all" onChange={() => changeSelect()} />            
-            <label htmlFor='select-all'>Select All</label>
+<div className="box-c">
+                <div className="box" onClick={() => setSelectAll(prev => !prev)}>
+                {selectAll ? <img src={Check} alt="" srcset="" /> : null}
+                </div>
+                <p>Select All</p>
+                </div>
             </div>
             {
               selectAll ? <div className="controls">
@@ -97,13 +102,13 @@ const DeleteFile = async(name) => {
                 <div className="box">
                 <img src={Save} alt="save all" onClick={() => downloadAll()} />
                 </div>
-                <p>Save All</p>
+                <p>Download</p>
                 </div>
                 <div className="box-c" onClick={() => deleteAll()}>
                 <div className="box">
                 <img src={Delete} alt="delete all" />
                 </div>
-                <p>Delete All</p>
+                <p>Delete</p>
                 </div>
               </div> 
               : null
@@ -119,7 +124,7 @@ const DeleteFile = async(name) => {
                   
                   { errorList && errorList.includes(data) ? 
                     <div className="error-div">
-                    <p><i class="bi bi-info-circle"></i> There is a error in this file.</p>
+                    <p><i class="bi bi-info-circle"></i> This File needs Attention.</p>
                   </div>: null
                 }
                   <div className="icons">

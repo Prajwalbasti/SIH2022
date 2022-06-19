@@ -1,5 +1,5 @@
 .file-show{
-    width: 40%;
+    width: 50%;
     margin: auto;
     display: flex;
     flex-direction: column;
@@ -22,10 +22,7 @@
             margin-left: auto;
         }
 
-        .controls{
-            display: flex;
-            
-            .box-c{
+        .box-c{
                 display: flex;
                 flex-direction: column;
                 align-items: center;
@@ -34,25 +31,34 @@
                 cursor: pointer;
                 .box{
                     background-color: white;
-                    padding: 3px;
                     border: solid 2px var(--gray1);
                     border-radius: 3px;
                     display: flex;
                     align-items: center;
                     justify-content: center;
+                    height: 27px;
+                    width: 27px;
                     img{
-                        height: 15px;
+                        width: 17px;
+                        position: absolute;
                     }
+
                     
                 }
                 p{
                     color: white;
+                    margin-top: 2px;
                 }
             }
 
+        .controls{
+            display: flex;
+            
+            
+
         }
 
-        i{
+        .bi-arrow-left-short{
             color: white;
             font-size: 25px;
             margin-right: 10px;
@@ -107,15 +113,21 @@
                     font-size: 0.875em;
                     padding-left: 10px;
                 }
+                i{
+                    margin-right: 5px;
+                }
             }
         }
 
         .details{
             display: flex;
             padding: 10px;
+            
             border-radius: 10px;
             cursor: pointer;
             p{
+                display: flex;
+                align-items: center;
                 color: var(--blue2);
                 font-weight: 600;
             }
