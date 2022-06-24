@@ -126,7 +126,7 @@ function Upload() {
             d.setMinutes(d.getMinutes() + 30);
   
             v["Appointment Date"] = String(
-              `${d.getMonth()}/${d.getDate()}/${d.getFullYear()}`
+              `${d.getMonth() + 1}/${d.getDate()}/${d.getFullYear()}`
             );
           });
   
