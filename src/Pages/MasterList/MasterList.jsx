@@ -13,32 +13,46 @@ const headers = ["Provider Name", "Location ",  "Item Description ", "Item Amoun
 function MasterList() {
     const [info, setInfo] = useState(null);
    
-    const doc =  db
+    const [edit, setEdit] = useState(false);
+
+    const doc = () => { db
            .collection("Master Rate List")     
            .doc("q4AOA8x0RrQBdYQbvmCH")  
-           .get().then((doc) => {
-                
+           .get().then((doc) => { 
                setInfo(doc.data());
                
-               
+               const data = [];
+
                for (const key in doc.data()) {
                 console.log(key);
                 for(const value in doc.data()[key]){
                     console.log(`${value}`);
-                    for (const i in doc.data()[key][value])
-                    {
-                        console.log(`${i} : ${doc.data()[key][value][i]}`)
-                    }
-                   
+                    data.push(doc.data()[key][value]);
+                    // for (const i in doc.data()[key][value])
+                    // {
+                    //     data1.push(doc.data()[key][value][i])                        
+                    //     // console.log(`${i} : ${doc.data()[key][value][i]}`)
+                    //
                 }
             }
-           
-              }
-              
-              );
+        setInfo(data);
+        });
+            }
+
+    useEffect(() => {
+                doc()
+            }, [])
+
+
   return (
     <div className='master-list'>
         
+        <div className="button_div">
+        {edit ? <button >Save</button> : <button onClick={()=> setEdit(true)}>Edit</button> }
+        
+        <button>ADD PROVIDER</button>
+
+        </div>
         <table className="table">
             <thead>
                 <tr>
@@ -49,17 +63,20 @@ function MasterList() {
             </thead>
             <tbody>
 
-                {masterData && masterData.length != 0 ? masterData.map((dat, key) => {
-                    
-                    return <tr className={key%2 != 0 ? "color" : "non-color"} key={key}>
-                         <td><input type="text" defaultValue={dat["Provider Name"]}/></td>
+                { masterData && masterData.length != 0 ? masterData.map((dat, key) => {
+                  return <tr className={key%2 != 0 ? "color" : "non-color"} key={key}>
+                  <td>{edit ? <input type="text" defaultValue={dat["Provider Name"]}/> :  <p>{dat["Provider Name"]}</p>}</td>
+                 
+                <td>{edit ? <input type="text" defaultValue={dat.ItemDescription2}/> : <p>{dat.ItemDescription2}</p>}</td>
+                  <td>{edit ? <input type="text" defaultValue={dat.Rate}/> : <p>{dat.Rate}</p> }</td>
+             </tr>
+           
                         
-                         <td><input type="text" defaultValue={dat.ItemDescription2}/></td>
-                         <td><input type="text" defaultValue={dat.Rate}/></td>
-                    </tr>
                     
-                    
-                }) : null}
+                }) : null  }
+
+                
+
 
             </tbody>
         </table>
