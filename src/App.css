@@ -57,3 +57,45 @@ body{
 ::-webkit-scrollbar-thumb:hover {
   background: #cbe7fd;
 }
+
+
+.master-modal-header{
+  padding: 12px !important;
+  font-size: 24px;
+  display: flex;
+  /* gap: 300px; */
+  justify-content: space-between;
+  background-color: var(--blue2);
+  color: white;
+
+}
+
+.master-modal-body{
+  display: flex;
+  padding: 25px 12px;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.master-modal-body input{
+  outline: none;
+  box-shadow: inset -4px -4px 12px rgba(253, 255, 255, 0.8), inset 4px 4px 12px rgba(187, 195, 206, 0.6);
+  border-radius: 10px;
+  color: var(--blue2);
+  background: var(--blue1);
+  padding: 12px 10px;
+  border: none;
+}
+.master-modal-body input::placeholder{
+  color: var(--blue2);
+
+}
+
+
+.master-modal-body button{
+  padding: 12px 15px;
+  background: none;
+  border: none;
+  color: var(--blue2);
+  cursor: pointer;
+}

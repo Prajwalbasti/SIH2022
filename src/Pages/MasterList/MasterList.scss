@@ -4,4 +4,32 @@
     input{
         width: 80%;  
     }
+
+    .button_div{
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 10px;
+
+        
+
+        button{
+            background: none;
+            border: none;
+            cursor: pointer;
+            color: #0762A3;
+
+            i{
+                color: #0762A3;
+                font-size: 20px;
+            }
+        }
+
+        .button-div-add{
+            padding: 10px;
+            background: #D6ECFD;
+            color: #0762A3;
+            border-radius: 6px;
+        }
+    }
+    
 }
