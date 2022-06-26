@@ -4,7 +4,7 @@ import { db, auth } from "../../firebase/firebase";
 import { masterData } from "../../Utils/data.js"
 import { useState, useEffect } from "react";
 import firebase from "firebase";
-
+import {v4 as uuidv4} from "uuid";
 import "./MasterList.scss"
 
 import Modal from 'react-modal';
@@ -32,6 +32,7 @@ function MasterList() {
     const [edit, setEdit] = useState(false);
 
     const ref = firebase.firestore().collection("Master List")
+
     const [data, setdata] = useState([])
 
     const [provName,setProvName] = useState('')
@@ -52,7 +53,6 @@ function MasterList() {
 
     useEffect(() => {
         getData()
-        console.log(data);
     }, [])
 
     let subtitle;
@@ -70,7 +70,7 @@ function MasterList() {
     function closeModal() {
         setIsOpen(false);
     }
-    function addNewProvider(){
+    function addNewProvider(newDataObj){
         if(!provName){
             alert("Name is required")
             return;
@@ -79,11 +79,18 @@ function MasterList() {
             alert("Rate is required")
             return;
         }
-
+       
         const obj = new Object()
         obj["Provider Name"] = provName
         obj["Rate"] = parseInt(provRate)
         data.push(obj)
+
+        ref.doc()
+        .set(obj)
+        .catch((err) =>{
+            alert(err)
+            console.log(err)
+        })
 
         setProvName('')
         setProvRate()
@@ -109,7 +116,7 @@ function MasterList() {
                     <div className="master-modal-body">
                         <input type="text" placeholder='Enter Provider Name' onChange={(e)=>{setProvName(e.target.value)}}/>
                         <input type="number" placeholder='Enter Rate' onChange={(e)=>{setProvRate(e.target.value)}}/>
-                        <button type="submit" onClick={()=>{addNewProvider()}}>Save</button>
+                        <button type="submit" onClick={()=>{addNewProvider(provName,provRate)}}>Save</button>
                     </div>
                 </div>
             </Modal>
