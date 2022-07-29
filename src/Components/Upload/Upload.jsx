@@ -269,38 +269,8 @@ function Upload() {
       {location.pathname==='/dashboard/upload' ? 
         <div className="bg">
           <div className= {uploaded ? "uploader active" : "uploader" }>
-            <div className='upload-drop'>
-              <div className="upload-inner">
-                <div className='upload-img'>
-                  <img src={logo} alt="logo" />
-                  <input
-                    type="file"
-                    hidden=""
-                    accept=".xlsx,.xls"
-                    id="input1"
-                    multiple
-                    onChange={(e) => handleUpload(e)}
-
-                  />
-
-                </div>
-              </div>
-            </div>
-            <div className="highlighted-txt">
-              {uploaded ? 
-              <p>{progressState}</p>
-              
-              : <p>Drag and drop or browse files to upload</p>
-              
-              }
-             </div>
-
-             {uploaded ?
-            <div className='upload-loader'>
-              <div className="progress-bar" style={{width:progress}}> 
-              </div>
-            </div>
-            : null}
+           
+           
           </div>
         </div>
         : null

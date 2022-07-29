@@ -10,7 +10,7 @@ function Home() {
         <div className="right">
 
         <div className='logoMain'>
-          <img src={logoLarge} alt="" />
+         
         </div>
         <Upload />
 

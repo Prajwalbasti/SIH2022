@@ -14,7 +14,7 @@ import { useEffect } from 'react'
 
 const items = [
     { name: 'home', label: 'Home',component:<i className="bi bi-house-door"></i>, img: Home, href:"/dashboard/upload" },
-    { name: 'list', label: 'Master Rate List',component:<i className="bi bi-list-task"></i>, img: list, href:"/master-list" },
+    { name: 'list', label: 'History',component:<i className="bi bi-list-task"></i>, img: list, href:"/master-list" },
     { name: 'profile', label: 'Profile',component:<i className="bi bi-person"></i>, img: profile,href:"/profile" },
     { name: 'setting', label: 'Settings',component:<i className="bi bi-gear"></i>, img: setting, href:"/setting" }]
     
@@ -46,7 +46,7 @@ function Sidebar({selected, setSelected}) {
     <div className='sidebar'>
         <div className="logo">
             <div className="round">
-                <img src={logo} alt="" />
+               
             </div>
         </div>
         <div className="menu">

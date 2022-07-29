@@ -72,7 +72,7 @@ function Register() {
           .then((cred) => {
             
             navigate("/login");
-            return db.collection("Hospital").doc(cred.user.uid).set({
+            return db.collection("System Admins").doc(cred.user.uid).set({
               Name: username,
               Lastname: lastname,
               Email: email,         
@@ -120,7 +120,7 @@ function Register() {
           var user = result.user;
           localStorage.setItem("npg_auth", token);
           navigate("/");
-          return db.collection("Hospital").doc(result.user.uid).set({
+          return db.collection("System Admins").doc(result.user.uid).set({
             Name: user.displayName,
             Email: user.email,
             

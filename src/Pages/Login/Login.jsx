@@ -106,7 +106,7 @@ function Login() {
           localStorage.setItem("npg_auth", token);
 
             navigate("/");
-            return db.collection("Hospital").doc(result.user.uid).set({
+            return db.collection("System Admins").doc(result.user.uid).set({
               Name: user.displayName,
               Email: user.email,
             });
