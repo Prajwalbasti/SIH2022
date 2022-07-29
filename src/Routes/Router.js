@@ -11,7 +11,6 @@ import { Navigate } from 'react-router-dom'
 
 import TablePage from '../Pages/TablePage/TablePage';
 import Upload from '../Components/Upload/Upload';
-import UploadedFiles from '../Pages/UploadedFiles/UploadedFiles';
 import Login from '../Pages/Login/Login';
 import Register from '../Pages/Register/Register';
 import Home from '../Pages/Home/Home';
@@ -45,7 +44,6 @@ function Router() {
             <div className="pageWrapper">
                 <Routes>
                     <Route path="upload" element={<Upload />}></Route>
-                    <Route path="uploaded" element={<UploadedFiles />}></Route>
                     <Route path="login" element={<Login />}></Route>
                     <Route path="register" element={<Register />}></Route>
                     <Route path="dashboard/:id" element={<Protected cmp={Home} />}></Route>

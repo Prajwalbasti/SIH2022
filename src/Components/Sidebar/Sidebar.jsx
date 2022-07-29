@@ -5,35 +5,35 @@ import profile from "../../Assets/profile.png"
 import setting from "../../Assets/setting.png"
 import logout from "../../Assets/logout.png"
 import Home from "../../Assets/Home.svg"
-import {useNavigate, useLocation} from "react-router-dom"
-import logo from './../../Assets/logoMini.svg'
+import { useNavigate, useLocation } from "react-router-dom"
+import logo from './../../Assets/drdo_logo.png'
 import { useEffect } from 'react'
 // import {GrHomeRounded} from 'react-icons/gr'
 // import {IoListSharp} from 'react-icons/io'
 
 
 const items = [
-    { name: 'home', label: 'Home',component:<i className="bi bi-house-door"></i>, img: Home, href:"/dashboard/upload" },
-    { name: 'list', label: 'History',component:<i className="bi bi-list-task"></i>, img: list, href:"/master-list" },
-    { name: 'profile', label: 'Profile',component:<i className="bi bi-person"></i>, img: profile,href:"/profile" },
-    { name: 'setting', label: 'Settings',component:<i className="bi bi-gear"></i>, img: setting, href:"/setting" }]
-    
+    { name: 'home', label: 'Home', component: <i className="bi bi-house-door"></i>, img: Home, href: "/dashboard/upload" },
+    { name: 'list', label: 'History', component: <i className="bi bi-list-task"></i>, img: list, href: "/master-list" },
+    { name: 'profile', label: 'Profile', component: <i className="bi bi-person"></i>, img: profile, href: "/profile" },
+    { name: 'setting', label: 'Settings', component: <i className="bi bi-gear"></i>, img: setting, href: "/setting" }]
 
 
-function Sidebar({selected, setSelected}) {
-    
+
+function Sidebar({ selected, setSelected }) {
+
     const navigate = useNavigate();
     const location = useLocation();
 
     useEffect(() => {
-        switch(location.pathname){
-            case "/dashboard/upload": 
+        switch (location.pathname) {
+            case "/dashboard/upload":
                 setSelected("home");
                 break;
-            case "/master-list": 
+            case "/master-list":
                 setSelected("list");
                 break;
-            case "/profile": 
+            case "/profile":
                 setSelected("profile");
                 break;
             case "setting":
@@ -43,35 +43,35 @@ function Sidebar({selected, setSelected}) {
     }, [])
 
     return (
-    <div className='sidebar'>
-        <div className="logo">
-            <div className="round">
-               
+        <div className='sidebar'>
+            <div className="logo">
+                <div className="round">
+
+                </div>
             </div>
-        </div>
-        <div className="menu">
-            <ul>
-                {items.map((data, key) => {
-                    return <li key={key} className={selected == data.name ? "active" : "non-active"} onClick={() => {
-                        navigate(data.href);
-                        setSelected(data.name)
+            <div className="menu">
+                <ul>
+                    {items.map((data, key) => {
+                        return <li key={key} className={selected == data.name ? "active" : "non-active"} onClick={() => {
+                            navigate(data.href);
+                            setSelected(data.name)
                         }} >
-                        
-                        {data.component}
-                        <p>{data.label}</p>
-                
-                    </li>
-                })}
-            </ul>
-        </div>
-        <div className="footer">
-            <div className="logout" onClick={() => {localStorage.clear(); window.location.reload(false)}}>
-            <i class="bi bi-box-arrow-left"></i>
-                <p>Logout</p>
+
+                            {data.component}
+                            <p>{data.label}</p>
+
+                        </li>
+                    })}
+                </ul>
+            </div>
+            <div className="footer">
+                <div className="logout" onClick={() => { localStorage.clear(); window.location.reload(false) }}>
+                    <i class="bi bi-box-arrow-left"></i>
+                    <p>Logout</p>
+                </div>
             </div>
         </div>
-    </div>
-  )
+    )
 }
 
 export default Sidebar

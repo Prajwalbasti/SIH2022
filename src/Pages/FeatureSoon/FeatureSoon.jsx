@@ -1,15 +1,15 @@
 import React from 'react'
 import "./FeatureSoon.scss"
-import logoLarge from './../../Assets/logoLarge.svg'
+import logoLarge from './../../Assets/drdo_logo.png'
 
 function FeatureSoon() {
   return (
     <div className='feature-soon'>
-        <div className='logoMain'>
-          <img src={logoLarge} alt="" />
-        </div>
+      <div className='logoMain'>
+       
+      </div>
 
-        <h6>Feature Coming Soon 🛠</h6>
+      <h6>Feature Coming Soon 🛠</h6>
     </div>
   )
 }

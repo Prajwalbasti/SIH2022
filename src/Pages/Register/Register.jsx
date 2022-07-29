@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import { db, auth } from "../../firebase/firebase";
 import firebase from "firebase";import "./Register.scss"
 import google_logo from "../../Assets/Google.png"
-import Input from '../../Components/Input/Input'
 import {Link, useNavigate, Navigate} from "react-router-dom";
 
 function Register() {
