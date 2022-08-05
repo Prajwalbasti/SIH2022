@@ -1,13 +1,11 @@
-
-
 import React from 'react'
 import Table from '../../Components/Table/Table'
 import { db, auth } from "../../firebase/firebase";
 import { masterData } from "../../Utils/data.js"
 import { useState, useEffect } from "react";
 import firebase from "firebase";
-import {v4 as uuidv4} from "uuid";
 import "./MasterList.scss"
+import logo from './../../Assets/drdo.svg'
 
 import Modal from 'react-modal';
 
@@ -142,7 +140,7 @@ function MasterList() {
                     </div>
                 </div>
             </Modal>
-
+              <img className='logoMa' src={logo} alt="" />
             <div className="button_div">
                 {edit?null:<button onClick={openModal} className='button-div-add'>ADD ENTRY</button>}
 

@@ -9,6 +9,8 @@ import * as cptable from 'xlsx/dist/cpexcel.full.mjs';
 import { useLocation, useNavigate, Navigate } from 'react-router-dom';
 import {masterData} from "../../Utils/data.js"
 import stringSimilarity from "string-similarity"
+import Model from '../../Components/Model/Model'
+
 set_cptable(cptable);
 
 
@@ -44,8 +46,9 @@ function Upload() {
         <div className="bg">
           <div className= {uploaded ? "uploader active" : "uploader" }>
            
-           
+          
           </div>
+          <Model></Model>
         </div>
         : null
       }

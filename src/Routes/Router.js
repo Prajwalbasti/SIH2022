@@ -20,7 +20,7 @@ import Protected from '../Protected/Protected';
 import NotFound from '../Pages/NotFound/NotFound';
 import MasterList from '../Pages/MasterList/MasterList';
 import FeatureSoon from '../Pages/FeatureSoon/FeatureSoon';
-
+import Profile from '../Pages/Profile/Profile';
 
 function Router() {
 
@@ -48,7 +48,7 @@ function Router() {
                     <Route path="register" element={<Register />}></Route>
                     <Route path="dashboard/:id" element={<Protected cmp={Home} />}></Route>
                     <Route path="master-list" element={<Protected cmp={MasterList} />}></Route>
-                    <Route path="profile" element={<Protected cmp={FeatureSoon} />}></Route>
+                    <Route path="profile" element={<Protected cmp={Profile} />}></Route>
                     <Route path="setting" element={<Protected cmp={FeatureSoon} />}></Route>
 
                     <Route path="/" element={<Navigate replace to="dashboard/upload" />} ></Route>

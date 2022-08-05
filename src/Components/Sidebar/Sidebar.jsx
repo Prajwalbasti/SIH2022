@@ -6,10 +6,8 @@ import setting from "../../Assets/setting.png"
 import logout from "../../Assets/logout.png"
 import Home from "../../Assets/Home.svg"
 import { useNavigate, useLocation } from "react-router-dom"
-import logo from './../../Assets/drdo_logo.png'
+import logo from './../../Assets/drdo.svg'
 import { useEffect } from 'react'
-// import {GrHomeRounded} from 'react-icons/gr'
-// import {IoListSharp} from 'react-icons/io'
 
 
 const items = [
@@ -46,7 +44,7 @@ function Sidebar({ selected, setSelected }) {
         <div className='sidebar'>
             <div className="logo">
                 <div className="round">
-
+                    <img src={logo} alt="" />
                 </div>
             </div>
             <div className="menu">

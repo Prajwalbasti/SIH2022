@@ -1,0 +1,39 @@
+body {
+    font-family: 'Nunito', sans-serif;
+  }
+  
+  .form{
+  width: auto;
+  height: auto;
+  background-color: rgb(255, 255, 255);
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: rgb(255, 255, 255);
+  overflow: auto;
+  margin-top: -10%;
+  }
+  
+  .profile_button{
+   margin-top: 25%;
+   margin-bottom: 20px;
+  }
+  
+  input{
+    text-align: left !important; 
+  }
+  
+  .update
+  {
+    font-size: 22px;
+      font-weight: 100;
+      line-height: 29px;
+      letter-spacing: 0.6px;
+    color : #3c9cc2;
+  }
