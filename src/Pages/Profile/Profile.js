@@ -133,7 +133,7 @@
 
 import React, { useState, useEffect } from "react";
 import { db, auth } from "../../firebase/firebase";
-import './Profile.scss';
+import './Profile.css';
 import Sidebar from "../../Components/Sidebar/Sidebar";
 import logo from './../../Assets/drdo.svg'
 
@@ -160,9 +160,7 @@ function Profile({user1}){
           Phone: phone,
           Email: email,
           Address1:address1,
-          Address2:address2,
           State:state,
-          Country:country,
           PostalCode:postalcode
         }).then(function () {
           setMsg("Account Updated");
@@ -176,7 +174,6 @@ function Profile({user1}){
           setPhone(snapshot.data().Phone) 
           setEmail(snapshot.data().Email) 
           setAddress1(snapshot.data().Address1) 
-          setAddress2(snapshot.data().Address2) 
           setState(snapshot.data().State) 
           setCountry(snapshot.data().Country) 
           setPostalCode(snapshot.data().PostalCode) 
@@ -191,8 +188,7 @@ function Profile({user1}){
           </div>
         
 
-              <div className="col1">
-        
+             <div className="col1">
                <input
                   type="username"
                   placeholder="👤 Name"
@@ -208,12 +204,7 @@ function Profile({user1}){
                   onChange={(e) => setPhone(e.target.value)}
                 />
                 <br></br>
-                <input
-                  type="address1"
-                  placeholder="📍 Address Line 1 "
-                  value={address1}
-                  onChange={(e) => setAddress1(e.target.value)}
-                />
+                
                 <br></br>
                 <input
                   type="state"
@@ -221,50 +212,40 @@ function Profile({user1}){
                   value={state}
                   onChange={(e) => setState(e.target.value)}
                 />
-                <br></br>
-               </div>
-               <div className="profile_button">
-                <button onClick={Update}>Update</button>
+                
+              
+               <br />
+               
+                    <input
+                      type="email"
+                      placeholder="📧 Email "
+                      value={email}
+                      onChange={(e) => setEmail(e.target.value)}
+                    />
+                    <br></br>
+                    <input
+                      type="postalcode"
+                      placeholder="📮 Postal Code "
+                      value={postalcode}
+                      onChange={(e) => setPostalCode(e.target.value)}
+                    />
+                    <br></br>
+                    <input
+                      type="address1"
+                      placeholder="📍 Address "
+                      value={address1}
+                      onChange={(e) => setAddress1(e.target.value)}
+                    />
+                    <br></br>
+                   
+              </div>
+                <br></br>    
+                <div className="profile_button">
+                <button> Update</button>
                 <div className ="update">
                   {msg}
                   </div>
-                </div>  
-        
-                <div className="col2">
-                <input
-                  type="email"
-                  placeholder="📧 Email "
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                />
-                <br></br>
-                <input
-                  type="postalcode"
-                  placeholder="📮 Postal Code "
-                  value={postalcode}
-                  onChange={(e) => setPostalCode(e.target.value)}
-                />
-                <br></br>
-                 <input
-                  type="address2"
-                  placeholder="📍 Address Line 2"
-                  value={address2}
-                  onChange={(e) => setAddress2(e.target.value)}
-                />
-                <br></br>
-                <input
-                  type="country"
-                  placeholder="➡️ Country "
-                  value={country}
-                  onChange={(e) => setCountry(e.target.value)}
-                />
-                </div>
-                <br></br>    
-
-
-
-
-
+                </div> 
       </div>
  )
 }

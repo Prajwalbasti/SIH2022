@@ -44,7 +44,7 @@ function Sidebar({ selected, setSelected }) {
         <div className='sidebar'>
             <div className="logo">
                 <div className="round">
-                    <img src={logo} alt="" />
+                    <img className="round" src={logo} alt="" />
                 </div>
             </div>
             <div className="menu">

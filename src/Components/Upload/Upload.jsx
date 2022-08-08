@@ -2,15 +2,12 @@ import React, { useState , useEffect } from 'react'
 import './Upload.scss'
 import logo from './../../Assets/uploadLogo.svg'
 import TablePage from '../../Pages/TablePage/TablePage';
-
-
 import { set_cptable } from "xlsx";
 import * as cptable from 'xlsx/dist/cpexcel.full.mjs';
 import { useLocation, useNavigate, Navigate } from 'react-router-dom';
 import {masterData} from "../../Utils/data.js"
 import stringSimilarity from "string-similarity"
 import Model from '../../Components/Model/Model'
-
 set_cptable(cptable);
 
 
@@ -19,8 +16,6 @@ function Upload() {
 
   const [file, setFile] = useState();
   const [fileName, setFileName] = useState([]);
-  const [fileData, setFileData] = useState();
-  const [errorList, setErrorList] = useState([]);
 
   const [step, setStep] = useState(1);
 
@@ -29,9 +24,6 @@ function Upload() {
 
   const [data, setData] = useState([])
 
-  const [progress,setProgress] = useState('20%')
-
-  const [progressState,setProgressState] = useState('File Uploaded')
 
   const navigate = useNavigate();
 
